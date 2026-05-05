@@ -299,23 +299,6 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
                     )}
                 </Button>
             </div>
-            {/* TODO: Remove this after testing */}
-            <div id="TEST_BUTTON">
-                    <Button
-                        size="lg"
-                        className="w-full"
-                        onClick={() => {
-                            testApiMiddleWare().then((res) => {
-                                console.log('TEST BUTTON - API Permissions', res);
-                            }).catch((error) => {
-                                console.error('TEST BUTTON - API Permissions Error', error);
-                            });
-                        }}
-                    >
-                        TEST BUTTON - API Permissions
-                    </Button>
-            </div>
-
             {product.kind === ProductKind.Group ? (
                 selectedVariant?.sku && (
                     <div className="text-xs text-muted-foreground">
