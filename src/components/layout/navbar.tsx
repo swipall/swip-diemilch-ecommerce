@@ -10,9 +10,9 @@ import {SearchInputSkeleton} from '@/components/shared/skeletons/search-input-sk
 
 export function Navbar() {
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background">
             <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between h-16">
+                <div className="flex items-center justify-between py-2">
                     <div className="flex items-center gap-8">
                         <Link href="/" className="text-xl font-bold">
                             <Image src="https://mmcb.b-cdn.net/media/attachments/0/c/4/0/60593b52331c1146353026da4cbc9ffbfd78b635db83fca47b25690df620/logo.jpg" alt="Swipall" width={40} height={27} className="h-14 w-auto" />

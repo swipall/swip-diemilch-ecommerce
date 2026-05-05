@@ -52,7 +52,7 @@ export async function Footer() {
                                 <li key={collection.id}>
                                     <Link
                                         href={`/collection/${collection.slug}`}
-                                        className="hover:text-foreground transition-colors"
+                                        className="hover:text-primary transition-colors"
                                     >
                                         {collection.value}
                                     </Link>
@@ -69,7 +69,7 @@ export async function Footer() {
                                     href="https://github.com/vendure-ecommerce"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-foreground transition-colors"
+                                    className="hover:text-primary transition-colors"
                                 >
                                     GitHub
                                 </a>
@@ -79,7 +79,7 @@ export async function Footer() {
                                     href="https://docs.vendure.io"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-foreground transition-colors"
+                                    className="hover:text-primary transition-colors"
                                 >
                                     Documentation
                                 </a>
@@ -89,7 +89,7 @@ export async function Footer() {
                                     href="https://github.com/vendure-ecommerce/vendure"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-foreground transition-colors"
+                                    className="hover:text-primary transition-colors"
                                 >
                                     Source code
                                 </a>
@@ -108,7 +108,7 @@ export async function Footer() {
                             href="https://swipall.io"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:text-foreground transition-colors"
+                            className="hover:text-primary transition-colors"
                         >
                             <Image src="/swipall-icon.svg" alt="Swipall" width={40} height={27} className="h-4 w-auto dark:invert" />
                         </a>

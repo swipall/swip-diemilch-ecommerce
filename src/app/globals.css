@@ -112,6 +112,21 @@
   --sidebar-ring: oklch(0.78 0.155 85);
 }
 
+@keyframes goldBorderIn {
+  0% {
+    border-color: transparent;
+    box-shadow: none;
+  }
+  45% {
+    border-color: oklch(89.968% 0.0246 94.107);
+    box-shadow: 0 0 32px oklch(96.075% 0.02573 92.406 / 0.55), inset 0 0 20px oklch(0.78 0.155 85 / 8%);
+  }
+  100% {
+    border-color: oklch(97.024% 0.01911 90.544 / 0.5);
+    box-shadow: 0 0 14px oklch(0.78 0.155 85 / 22%);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -121,5 +136,17 @@
   }
   svg {
     @apply text-primary;
+  }
+  a {
+    color: oklch(1 0 0);
+    transition: color 0.2s ease;
+  }
+  a:hover,
+  a:focus-visible {
+    color: oklch(0.78 0.155 85);
+    outline: none;
+  }
+  p, span, li, h1, h2, h3, h4, h5, h6, label, td, th, dt, dd {
+    color: inherit;
   }
 }
