@@ -7,6 +7,7 @@ import {Button} from '@/components/ui/button';
 import {Price} from '@/components/commerce/price';
 import { Order } from '@/lib/swipall/types/types';
 import { isUserAuthenticated } from './actions';
+import { toast } from 'sonner';
 
 export function OrderSummary({activeOrder}: { activeOrder: Order }) {
     const router = useRouter();
@@ -23,6 +24,7 @@ export function OrderSummary({activeOrder}: { activeOrder: Order }) {
                 router.push('/checkout');
             } catch (error) {
                 console.error('Error al verificar autenticación:', error);
+                toast.error('Error', { description: 'No se pudo verificar tu sesión. Intenta de nuevo.' });
             }
         });
     };

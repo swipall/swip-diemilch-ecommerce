@@ -23,6 +23,7 @@ import { registerAction } from './actions';
 import { setAuthUser } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { CurrentUser } from '@/lib/swipall/types/types';
+import { toast } from 'sonner';
 
 function indexSpaceBetween(value: string) {
     return value.search(" ");
@@ -81,7 +82,6 @@ interface RegistrationFormProps {
 export function RegistrationForm({ redirectTo }: RegistrationFormProps) {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [serverError, setServerError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<RegistrationFormData>({
@@ -108,11 +108,8 @@ export function RegistrationForm({ redirectTo }: RegistrationFormProps) {
     const { fetchingZip, states, cities, suburbs } = useZipAutoComplete(postalCode);
 
     const onSubmit = (data: RegistrationFormData) => {
-        setServerError(null);
-
-        // Validar que los nombres no sean vacíos
         if (!data.first_name.trim() || !data.last_name.trim()) {
-            setServerError('El nombre y el apellido son requeridos');
+            toast.error('Datos incompletos', { description: 'El nombre y el apellido son requeridos' });
             return;
         }
 
@@ -142,17 +139,15 @@ export function RegistrationForm({ redirectTo }: RegistrationFormProps) {
             try {
                 const result = await registerAction(undefined, formData);
                 if (result?.error) {
-                    setServerError(result.error);
+                    toast.error('Error al crear cuenta', { description: result.error });
                 } else if (result?.success && result?.user) {
-                    // Save user to localStorage
                     setAuthUser(result.user as CurrentUser);
-                    // Redirect after successful registration and user saved
                     router.push(result.redirectTo || '/');
                     router.refresh();
                 }
             } catch (error) {
-                // Log any unexpected errors
                 console.error('Registration error:', error);
+                toast.error('Error inesperado', { description: 'Ocurrió un error al crear la cuenta' });
             }
         });
     };
@@ -483,12 +478,6 @@ export function RegistrationForm({ redirectTo }: RegistrationFormProps) {
                                 )}
                             />
                         </div>
-
-                        {serverError && (
-                            <div className="text-sm text-destructive">
-                                {serverError}
-                            </div>
-                        )}
 
                         <Button type="submit" className="w-full" disabled={isPending}>
                             {isPending ? 'Creando cuenta...' : 'Crear Cuenta'}

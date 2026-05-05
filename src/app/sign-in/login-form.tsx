@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/form';
 import Link from 'next/link';
 import { setAuthUser } from '@/lib/auth-client';
+import { toast } from 'sonner';
 
 const loginSchema = z.object({
     email: z.email('Por favor ingresa un correo electrónico válido'),
@@ -35,7 +36,6 @@ interface LoginFormProps {
 export function LoginForm({redirectTo}: LoginFormProps) {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [serverError, setServerError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<LoginFormData>({
@@ -47,26 +47,22 @@ export function LoginForm({redirectTo}: LoginFormProps) {
     });
 
     const onSubmit = (data: LoginFormData) => {
-        setServerError(null);
-
         startTransition(async () => {
             const formData = new FormData();
             formData.append('email', data.email);
             formData.append('password', data.password);
             try {
-                const result = await loginAction(undefined, formData);                
+                const result = await loginAction(undefined, formData);
                 if (result?.error) {
-                    setServerError(result.error);
+                    toast.error('Error al iniciar sesión', { description: result.error });
                 } else if (result?.success && result?.user) {
-                    // Save user to localStorage
                     setAuthUser(result.user);
-                    // Redirect after successful login and user saved
                     router.push(redirectTo || '/');
                     router.refresh();
                 }
             } catch (error) {
-                // Log any unexpected errors
                 console.error('Login error:', error);
+                toast.error('Error inesperado', { description: 'Ocurrió un error al iniciar sesión' });
             }
         });
     };
@@ -142,11 +138,6 @@ export function LoginForm({redirectTo}: LoginFormProps) {
                             )}
                         />
 
-                        {serverError && (
-                            <div className="text-sm text-destructive">
-                                {serverError}
-                            </div>
-                        )}
                         <Button type="submit" className="w-full" disabled={isPending}>
                             {isPending ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                         </Button>

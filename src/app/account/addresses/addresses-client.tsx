@@ -26,6 +26,7 @@ import { AddressForm } from './address-form';
 import { createAddress, updateAddress, deleteAddress } from './actions';
 import { useRouter } from 'next/navigation';
 import { AddressInterface } from '@/lib/swipall/users/user.types';
+import { toast } from 'sonner';
 
 interface AddressesClientProps {
     addresses: AddressInterface[];
@@ -64,9 +65,10 @@ export function AddressesClient({ addresses }: AddressesClientProps) {
             router.refresh();
             setDeleteDialogOpen(false);
             setAddressToDelete(null);
+            toast.success('Dirección eliminada');
         } catch (error) {
             console.error('Error deleting address:', error);
-            alert(`Error eliminando dirección: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+            toast.error('Error al eliminar dirección', { description: error instanceof Error ? error.message : 'Error desconocido' });
         } finally {
             setIsDeleting(false);
         }
@@ -83,9 +85,10 @@ export function AddressesClient({ addresses }: AddressesClientProps) {
             router.refresh();
             setDialogOpen(false);
             setEditingAddress(null);
+            toast.success(editingAddress ? 'Dirección actualizada' : 'Dirección guardada');
         } catch (error) {
             console.error('Error saving address:', error);
-            alert(`Error guardando dirección: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+            toast.error('Error al guardar dirección', { description: error instanceof Error ? error.message : 'Error desconocido' });
         } finally {
             setIsSubmitting(false);
         }
