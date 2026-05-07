@@ -52,12 +52,12 @@ export function FacetFilters({ taxonomies, searchParams }: FacetFiltersProps) {
     }
 
     return (
-        <div className="p-4 rounded-lg">
+        <div className="py-4 rounded-lg">
             {
                 currentSelectedFilters().length > 0 && (
                     <div className="mb-4 w-full border-b border-gray-300 pb-4 justify-between items-center">
                         <p className="text-sm font-semibold mb-2">Filtrando por:</p>
-                        <ul className="space-y-1 text-sm text-muted-foreground">
+                        <ul className="space-y-3 text-sm text-muted-foreground">
                             {currentSelectedFilters().map((filter) => (
                                 <li key={filter} className="text-black">
                                     <div className='flex flex-row justify-between items-center'>
@@ -79,10 +79,10 @@ export function FacetFilters({ taxonomies, searchParams }: FacetFiltersProps) {
             {
                 taxonomies.length > 0 ? (
                     <div>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
+                        <ul className="space-y-3 text-sm text-muted-foreground">
                             {taxonomies.map((taxonomy) => (
                                 <li key={taxonomy.id} className="text-black">
-                                    <a onClick={() => navigateToFacet(taxonomy)} className="cursor-pointer hover:text-foreground transition-colors">
+                                    <a onClick={() => navigateToFacet(taxonomy)} className="cursor-pointer hover:text-primary transition-colors">
                                         {taxonomy.value}
                                     </a>
                                 </li>

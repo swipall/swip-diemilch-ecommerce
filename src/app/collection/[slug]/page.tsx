@@ -82,11 +82,11 @@ export default async function CollectionPage({ params, searchParams }: PageProps
     const customerId = await getAuthUserCustomerId();
     const productDataPromise = getCollectionProducts(slug, searchParamsResolved, customerId);
     const taxonomies = await getTaxonomies({ parent__slug: slug });
-    
     return (
-        <div className="container mt-16 bg-gray-100">
+        <div className="container mx-auto px-4 py-8 mt-16">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <aside className="lg:col-span-1">
+                    <div className='font-bold text-sm text-primary uppercase'>Categorías</div>
                     <Suspense fallback={<div className="h-64 animate-pulse bg-muted rounded-lg" />}>
                         <FacetFilters taxonomies={taxonomies.results} searchParams={searchParamsResolved} />
                     </Suspense>
