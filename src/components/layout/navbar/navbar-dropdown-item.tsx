@@ -54,7 +54,7 @@ export function NavbarDropdownItem({ title, href, items }: NavbarDropdownItemPro
                                 >
                                     <span className="font-medium">{item.title}</span>
                                     {item.excerpt && (
-                                        <span className="ml-2 line-clamp-1 text-xs text-muted-foreground">
+                                        <span className="ml-2 line-clamp-1 text-xs text-white/50">
                                             {item.excerpt}
                                         </span>
                                     )}

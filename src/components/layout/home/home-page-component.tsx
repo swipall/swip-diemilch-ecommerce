@@ -19,7 +19,7 @@ export async function HomePageComponent() {
     }
 
     return (
-        <div className="min-h-screen mt-12">
+        <div className="min-h-screen mt-14">
             {blocks.map((post) => (
                 <HomeSectionRenderer key={post.slug} post={post} />
             ))}

@@ -241,14 +241,32 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
 
     return (
         <div className="space-y-6">
-            <div>
-                <p className="text-2xl font-bold mt-2">
+            {product.kind === ProductKind.Group ? (
+                selectedVariant?.sku && (
+                    <div className="text-xs text-white/50">
+                        SKU: {selectedVariant.sku}
+                    </div>
+                )
+            ) : (
+                product.sku && (
+                    <div className="text-xs text-white/50">
+                        SKU: {product.sku}
+                    </div>
+                )
+            )}
+            <div className='flex items-center gap-2'>
+                <p className="text-2xl font-bold">
                     <Price value={itemPrice} />
                 </p>
-            </div>
-
-            <div className="prose prose-sm max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: product.description || '' }} />
+                <div className="text-sm">
+                    {isInStock ? (
+                        <span className="bg-emerald-200 text-emerald-900 font-bold px-2 py-1 rounded-full">
+                            {availableQuantity} en existencia
+                        </span>
+                    ) : (
+                        <span className="bg-red-200 text-red-900 px-2 py-1 rounded-full font-bold">Agotado</span>
+                    )}
+                </div>
             </div>
 
             {product.kind === ProductKind.Group && variants.length > 0 && (
@@ -268,33 +286,13 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
                     onRemoveMaterial={onRemoveMaterial}
                 />
             )}
-            {product.kind === ProductKind.Group ? (
-                selectedVariant?.sku && (
-                    <div className="text-xs text-muted-foreground">
-                        SKU: {selectedVariant.sku}
-                    </div>
-                )
-            ) : (
-                product.sku && (
-                    <div className="text-xs text-muted-foreground">
-                        SKU: {product.sku}
-                    </div>
-                )
-            )}
-            <div className="text-sm">
-                {isInStock ? (
-                    <span className="bg-emerald-200 text-emerald-900 font-bold px-2 py-1 rounded-full">
-                        {availableQuantity} en existencia
-                    </span>
-                ) : (
-                    <span className="bg-red-200 text-red-900 px-2 py-1 rounded-full font-bold">Agotado</span>
-                )}
-            </div>
+
+
 
             <div className="pt-4">
                 <Button
                     size="lg"
-                    className="w-full"
+                    className="w-full text-lg font-bold"
                     disabled={!canAddToCart || isPending}
                     onClick={handleAddToCart}
                 >
@@ -311,7 +309,10 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
                     )}
                 </Button>
             </div>
-
+            <div className="prose prose-sm max-w-none">
+                <div className='text-sm text-primary uppercase my-2 font-semibold'>Descripción</div>
+                <div dangerouslySetInnerHTML={{ __html: product.description || '' }} />
+            </div>
         </div>
     );
 }

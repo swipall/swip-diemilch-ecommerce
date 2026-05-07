@@ -67,7 +67,7 @@ export function EditEmailForm({ currentEmail }: EditEmailFormProps) {
                             required
                             disabled={isPending}
                         />
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-white/50">
                             Enter your password to confirm this change.
                         </p>
                     </div>
