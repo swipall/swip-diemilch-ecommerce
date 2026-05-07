@@ -25,12 +25,8 @@ export function FacetFilters({ taxonomies, searchParams }: FacetFiltersProps) {
         return params.toString();
     };
 
-    const currentSelectedFilters = () => {
-        const value = searchParams['taxonomy_value'];
-        if (typeof value === 'string') return [value];
-        if (Array.isArray(value)) return value;
-        return [];
-    };
+    const selectedSlug = searchParams['taxonomies__slug__and'] as string | undefined;
+    const selectedLabel = searchParams['taxonomy_value'] as string | undefined;
 
     const navigateToFacet = (taxonomy: TaxonomyInterface) => {
         window.location.href = `?${buildParams({
@@ -46,41 +42,63 @@ export function FacetFilters({ taxonomies, searchParams }: FacetFiltersProps) {
         })}`;
     };
 
+    if (taxonomies.length === 0) return null;
+
     return (
-        <div className="py-4 rounded-lg">
-            {currentSelectedFilters().length > 0 && (
-                <div className="mb-4 w-full border-b border-gray-300 pb-4 justify-between items-center">
-                    <p className="text-sm font-semibold mb-2">Filtrando por:</p>
-                    <ul className="space-y-3 text-sm text-white">
-                        {currentSelectedFilters().map((filter) => (
-                            <li key={filter} className="text-white">
-                                <div className='flex flex-row justify-between items-center'>
-                                    {filter}
-                                    <button
-                                        onClick={() => onClearFilters()}
-                                        className="ml-2 text-red-500 hover:text-red-700 transition-colors p-2"
-                                    >
-                                        &times;
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-            {taxonomies.length > 0 && (
-                <div>
-                    <ul className="space-y-3 text-sm text-white">
-                        {taxonomies.map((taxonomy) => (
-                            <li key={taxonomy.id} className="text-white">
-                                <a onClick={() => navigateToFacet(taxonomy)} className="cursor-pointer hover:text-primary transition-colors">
-                                    {taxonomy.value ?? taxonomy.name}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
+        <>
+            {/* Mobile: chips horizontales */}
+            <div className="lg:hidden flex flex-nowrap overflow-x-auto gap-2 py-3 -mx-4 px-4 scrollbar-hide">
+                {selectedSlug && selectedLabel && (
+                    <button
+                        onClick={onClearFilters}
+                        className="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium bg-primary text-white border border-primary"
+                    >
+                        {selectedLabel}
+                        <span className="text-sm leading-none">&times;</span>
+                    </button>
+                )}
+                {taxonomies
+                    .filter(t => t.slug !== selectedSlug)
+                    .map((taxonomy) => (
+                        <button
+                            key={taxonomy.id}
+                            onClick={() => navigateToFacet(taxonomy)}
+                            className="flex-shrink-0 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-black border border-gray-300 hover:border-primary hover:text-primary transition-colors"
+                        >
+                            {taxonomy.value ?? taxonomy.name}
+                        </button>
+                    ))}
+            </div>
+
+            {/* Desktop: lista vertical en el sidebar */}
+            <div className="hidden lg:block py-4 rounded-lg">
+                {selectedLabel && (
+                    <div className="mb-4 w-full border-b border-gray-300 pb-4">
+                        <p className="text-sm font-semibold mb-2">Filtrando por:</p>
+                        <div className="flex flex-row justify-between items-center text-sm">
+                            <span>{selectedLabel}</span>
+                            <button
+                                onClick={onClearFilters}
+                                className="ml-2 text-red-500 hover:text-red-700 transition-colors p-2"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                    </div>
+                )}
+                <ul className="space-y-3 text-sm text-white">
+                    {taxonomies.map((taxonomy) => (
+                        <li key={taxonomy.id} className="text-white">
+                            <a
+                                onClick={() => navigateToFacet(taxonomy)}
+                                className={`cursor-pointer transition-colors hover:text-primary ${taxonomy.slug === selectedSlug ? 'text-primary font-semibold' : ''}`}
+                            >
+                                {taxonomy.value ?? taxonomy.name}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
     );
 }
