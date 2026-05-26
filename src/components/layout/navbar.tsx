@@ -14,7 +14,7 @@ export function Navbar() {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border/40">
             <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between py-2">
+                <div className="flex items-center justify-center py-2">
                     {/* Left: hamburger (mobile) + logo + desktop nav */}
                     <div className="flex items-center gap-3">
                         <Suspense>
@@ -22,26 +22,27 @@ export function Navbar() {
                                 <NavbarCollectionsMobile />
                             </MobileMenu>
                         </Suspense>
+                        <div className="flex flex-col justify-center items-center">
+                            <Link href="/" className="flex-shrink-0">
+                                <Image
+                                    src="https://mmcb.b-cdn.net/media/attachments/7/6/e/4/2f41f40fd7c4c4abfb643ff58a365c5fda3e94d068f14814dc36151afdb7/logo-diemilch.webp"
+                                    alt="Die Milch"
+                                    width={150}
+                                    height={27}
+                                    className="h-14 w-auto"
+                                />
+                            </Link>
 
-                        <Link href="/" className="flex-shrink-0">
-                            <Image
-                                src="https://mmcb.b-cdn.net/media/attachments/0/c/4/0/60593b52331c1146353026da4cbc9ffbfd78b635db83fca47b25690df620/logo.jpg"
-                                alt="Swipall"
-                                width={40}
-                                height={27}
-                                className="h-14 w-auto"
-                            />
-                        </Link>
-
-                        <nav className="hidden md:flex items-center gap-6">
-                            <Suspense>
-                                <NavbarCollections />
-                            </Suspense>
-                        </nav>
+                            <nav className="hidden md:flex items-center gap-6">
+                                <Suspense>
+                                    <NavbarCollections />
+                                </Suspense>
+                            </nav>
+                        </div>
                     </div>
 
                     {/* Right: search (desktop) + cart + user */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 hidden">
                         <div className="hidden lg:flex">
                             <Suspense fallback={<SearchInputSkeleton />}>
                                 <SearchInput />
