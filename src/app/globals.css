@@ -114,56 +114,7 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-@keyframes goldBorderIn {
-  0% {
-    border-color: transparent;
-    box-shadow: none;
-  }
-  45% {
-    border-color: oklch(89.968% 0.0246 94.107);
-    box-shadow: 0 0 32px oklch(96.075% 0.02573 92.406 / 0.55), inset 0 0 20px oklch(0.78 0.155 85 / 8%);
-  }
-  100% {
-    border-color: oklch(97.024% 0.01911 90.544 / 0.5);
-    box-shadow: 0 0 14px oklch(0.78 0.155 85 / 22%);
-  }
-}
 
-/* Header scrolled: textos, iconos e input en blanco */
-header[data-scrolled="true"] a,
-header[data-scrolled="true"] button,
-header[data-scrolled="true"] span {
-    color: white;
-}
-/* Nav links: quitar fondo y borde que genera navigationMenuTriggerStyle */
-header[data-scrolled="true"] [data-slot="navigation-menu-trigger"],
-header[data-scrolled="true"] [data-slot="navigation-menu-link"] {
-    background-color: transparent;
-    color: white;
-}
-header[data-scrolled="true"] [data-slot="navigation-menu-trigger"]:hover,
-header[data-scrolled="true"] [data-slot="navigation-menu-trigger"]:focus,
-header[data-scrolled="true"] [data-slot="navigation-menu-link"]:hover,
-header[data-scrolled="true"] [data-slot="navigation-menu-link"]:focus {
-    background-color: rgb(255 255 255 / 0.12);
-    color: white;
-}
-header[data-scrolled="true"] svg {
-    color: white;
-}
-header[data-scrolled="true"] img {
-    filter: brightness(0) invert(1);
-    transition: filter 0.3s;
-}
-header[data-scrolled="true"] input {
-    color: white;
-    border-color: rgb(255 255 255 / 0.35);
-    background-color: rgb(255 255 255 / 0.08);
-}
-header[data-scrolled="true"] input::placeholder {
-    color: rgb(255 255 255 / 0.55);
-    opacity: 1;
-}
 
 @layer base {
   * {
@@ -172,19 +123,16 @@ header[data-scrolled="true"] input::placeholder {
   body {
     @apply bg-background text-foreground;
   }
+
+  p, a:not([role="button"]) {
+    @apply text-foreground;
+  }
   /* Solo SVGs sin clase de color explícita heredan el primario */
   svg:not([class*="text-"]) {
     @apply text-primary;
   }
   /* Links: usa variable para respetar el tema */
-  a {
-    color: var(--color-foreground);
-    transition: color 0.2s ease;
-  }
-  a:hover,
-  a:focus-visible {
-    color: var(--color-secondary);
-  }
+ 
   input, textarea, select {
     color: var(--color-muted-foreground);
     border-color: var(--color-border);

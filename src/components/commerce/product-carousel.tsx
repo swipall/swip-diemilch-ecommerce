@@ -1,9 +1,9 @@
 'use client';
 
-import {ProductCard} from "@/components/commerce/product-card";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/carousel";
+import { ProductCard } from "@/components/commerce/product-card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel";
 import { InterfaceInventoryItem } from "@/lib/swipall/types/types";
-import {useId} from "react";
+import { useId } from "react";
 
 interface ProductCarouselClientProps {
     title: string;
@@ -11,18 +11,20 @@ interface ProductCarouselClientProps {
     products: InterfaceInventoryItem[];
 }
 
-export function ProductCarousel({title, excerpt, products}: ProductCarouselClientProps) {
+export function ProductCarousel({ title, excerpt, products }: ProductCarouselClientProps) {
     const id = useId();
 
-    if(!products){
+    if (!products) {
         return null;
     }
 
     return (
         <section className="py-12 md:py-16">
-            <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8">{title}</h2>
-                <p className="text-muted-foreground">{excerpt}</p>
+            <div className="container px-6 mx-auto">
+                <div className="mb-8">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-2">{title}</h2>
+                    <p className="text-muted-foreground">{excerpt}</p>
+                </div>
                 <Carousel
                     opts={{
                         align: "start",
@@ -33,13 +35,13 @@ export function ProductCarousel({title, excerpt, products}: ProductCarouselClien
                     <CarouselContent className="-ml-2 md:-ml-4">
                         {products.map((product, i) => (
                             <CarouselItem key={id + i}
-                                          className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                                <ProductCard product={product}/>
+                                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                                <ProductCard product={product} />
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="hidden md:flex"/>
-                    <CarouselNext className="hidden md:flex"/>
+                    <CarouselPrevious className="hidden md:flex" />
+                    <CarouselNext className="hidden md:flex" />
                 </Carousel>
             </div>
         </section>

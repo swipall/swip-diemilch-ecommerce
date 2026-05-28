@@ -7,6 +7,14 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import {
     buildCanonicalUrl,
     buildOgImages,
     SITE_NAME,
@@ -123,7 +131,28 @@ export default async function ProductDetailPage({ params, searchParams }: PagePr
 
     return (
         <>
-            <div className="container mx-auto px-4 py-8 mt-16">
+            <div className="container mx-auto px-4 py-8 mt-[100px] sm:mt-16">
+                <Breadcrumb className="mb-6">
+                    <BreadcrumbList>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href="/">Inicio</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        {product.taxonomy?.[0] && (
+                            <>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink href={`/collection/${product.taxonomy[0].slug}`}>
+                                        {product.taxonomy[0].name}
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                            </>
+                        )}
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>{product.name}</BreadcrumbPage>
+                        </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Left Column: Image Carousel */}
                     <div className="lg:sticky lg:top-20 lg:self-start">
@@ -145,7 +174,7 @@ export default async function ProductDetailPage({ params, searchParams }: PagePr
             </div>
 
             {/* Product Benefits Section */}
-            <section className="py-16 bg-muted/30 mt-12">
+            <section className="py-16 bg-muted/30 mt-12 hidden">
                 <div className="container mx-auto px-4 border border-white/50 rounded-xl p-8">
                     <div className='p-8'>
                         <div className='mb-8 pb-8'>

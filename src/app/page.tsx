@@ -4,17 +4,17 @@ import {SITE_NAME, SITE_URL, buildCanonicalUrl} from "@/lib/metadata";
 
 export const metadata: Metadata = {
     title: {
-        absolute: `${SITE_NAME} - Coleccionables Pokémon,¡Haz que tu deck evolucione con KOI!`,
+        absolute: `${SITE_NAME} DIE MILCH- Sustitutos de leche en polvo y energizantes para perros y gatos. `,
     },
     description:
-        "En KOI, sabemos que cada carta cuenta una historia y cada sobre es una oportunidad de encontrar esa pieza legendaria que le falta a tu deck. Por eso, hemos curado la mejor selección de productos oficiales de Pokémon TCG, desde ediciones especiales hasta piezas de lujo para los coleccionistas más exigentes.",
+        "Te ofrecemos sustitutos de leche en polvo y energizantes formulados con los más altos estándares de calidad. Diseñados para brindarles el soporte nutricional, la vitalidad y la energía que necesitan para crecer sanos, fuertes y listos para explorar el mundo a tu lado.",
     alternates: {
         canonical: buildCanonicalUrl("/"),
     },
     openGraph: {
-        title: `${SITE_NAME} - Coleccionables Pokémon,¡Haz que tu deck evolucione con KOI!`,
+        title: `${SITE_NAME} - Sustitutos de leche en polvo y energizantes para perros y gatos.`,
         description:
-            "En KOI, sabemos que cada carta cuenta una historia y cada sobre es una oportunidad de encontrar esa pieza legendaria que le falta a tu deck. Por eso, hemos curado la mejor selección de productos oficiales de Pokémon TCG, desde ediciones especiales hasta piezas de lujo para los coleccionistas más exigentes.",
+            "te ofrecemos sustitutos de leche en polvo y energizantes formulados con los más altos estándares de calidad. Diseñados para brindarles el soporte nutricional, la vitalidad y la energía que necesitan para crecer sanos, fuertes y listos para explorar el mundo a tu lado.",
         type: "website",
         url: SITE_URL,
     },

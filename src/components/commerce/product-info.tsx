@@ -4,7 +4,7 @@ import { addToCart, getGroupVariant, testApiMiddleWare } from '@/app/product/[id
 import { Price } from '@/components/commerce/price';
 import { Button } from '@/components/ui/button';
 import { InterfaceInventoryItem, Material, ProductKind, ProductVariant, VariantOption } from '@/lib/swipall/types/types';
-import { CheckCircle2, ShoppingCart } from 'lucide-react';
+import { CheckCircle2, Link, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 import { toast } from 'sonner';
@@ -243,13 +243,13 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
         <div className="space-y-6">
             {product.kind === ProductKind.Group ? (
                 selectedVariant?.sku && (
-                    <div className="text-xs text-white/50">
+                    <div className="text-xs text-foreground">
                         SKU: {selectedVariant.sku}
                     </div>
                 )
             ) : (
                 product.sku && (
-                    <div className="text-xs text-white/50">
+                    <div className="text-xs text-foreground">
                         SKU: {product.sku}
                     </div>
                 )
@@ -258,7 +258,7 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
                 <p className="text-2xl font-bold">
                     <Price value={itemPrice} />
                 </p>
-                <div className="text-sm">
+                <div className="text-sm hidden">
                     {isInStock ? (
                         <span className="bg-emerald-200 text-emerald-900 font-bold px-2 py-1 rounded-full">
                             {availableQuantity} en existencia
@@ -292,7 +292,7 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
             <div className="pt-4">
                 <Button
                     size="lg"
-                    className="w-full text-lg font-bold"
+                    className="w-full text-lg font-bold hidden"
                     disabled={!canAddToCart || isPending}
                     onClick={handleAddToCart}
                 >
@@ -307,6 +307,11 @@ export function ProductInfo({ product, searchParams }: ProductInfoProps) {
                             {buttonText}
                         </>
                     )}
+                </Button>
+                <Button
+                    size="lg"
+                    className="w-full text-lg font-bold">
+                        <a className='text-white' href='https://api.whatsapp.com/send/?phone=3346858683&text&type=phone_number&app_absent=0'>Comprar ahora</a>
                 </Button>
             </div>
             <div className="prose prose-sm max-w-none">

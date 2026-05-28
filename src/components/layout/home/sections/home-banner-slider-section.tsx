@@ -14,6 +14,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import type { CmsPost } from "@/lib/swipall/types/types";
 import { BannerSliderBody, parsePostBody } from "../home-section-types";
+import { isVideoUrl } from "@/lib/utils";
 
 interface HomeBannerSliderSectionProps {
     post: CmsPost;
@@ -44,7 +45,7 @@ export function HomeBannerSliderSection({
     };
 
     return (
-        <section className="max-w-6xl mx-auto mt-8 px-3 py-3 md:px-6 md:py-6">
+        <section className="mx-auto mt-8 px-3 py-3 md:px-6 md:py-6">
             <div className="relative w-full overflow-hidden rounded-2xl">
                 <Carousel
                     opts={{
@@ -104,15 +105,26 @@ function BannerSliderItemFull({ item }: { item: CmsPost }) {
 
     return (
         <div className="relative w-full">
-            <Image
-                src={item.featured_image}
-                alt={item.title ?? "Banner"}
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="w-full h-auto block"
-                priority
-            />
+            {isVideoUrl(item.featured_image) ? (
+                <video
+                    src={item.featured_image}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-auto block rounded-2xl"
+                />
+            ) : (
+                <Image
+                    src={item.featured_image}
+                    alt={item.title ?? "Banner"}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="w-full h-auto block"
+                    priority
+                />
+            )}
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
             <div className="absolute inset-0 flex items-center">
                 <div className="container mx-auto px-4">
@@ -150,31 +162,34 @@ function BannerSliderItemSimple({ item }: { item: CmsPost }) {
         return null;
     }
 
-    if (item.link) {
-        return (
-            <Link href={item.link} className="block w-full group">
-                <Image
-                    src={item.featured_image}
-                    alt="Banner"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    className="w-full h-auto block group-hover:opacity-90 transition-opacity"
-                    priority
-                />
-            </Link>
-        );
-    }
-
-    return (
+    const media = isVideoUrl(item.featured_image) ? (
+        <video
+            src={item.featured_image}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-auto block rounded-2xl"
+        />
+    ) : (
         <Image
             src={item.featured_image}
             alt="Banner"
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full h-auto block rounded-2xl"
+            className="w-full h-auto block"
             priority
         />
     );
+
+    if (item.link) {
+        return (
+            <Link href={item.link} className="block w-full group hover:opacity-90 transition-opacity">
+                {media}
+            </Link>
+        );
+    }
+
+    return media;
 }

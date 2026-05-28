@@ -19,7 +19,7 @@ export async function HomePageComponent() {
     }
 
     return (
-        <div className="min-h-screen max-w-6xl mx-auto mt-[120px] sm:mt-14">
+        <div className="min-h-screen container sm:mx-auto mt-[120px] md:mt-12">
             {blocks.map((post) => (
                 <HomeSectionRenderer key={post.slug} post={post} />
             ))}

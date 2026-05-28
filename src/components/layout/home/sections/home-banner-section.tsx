@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { CmsPost } from "@/lib/swipall/types/types";
 import { parsePostBody } from "../home-section-types";
+import { isVideoUrl } from "@/lib/utils";
 
 interface HomeBannerBody {
     subtitle?: string;
@@ -26,14 +27,25 @@ export function HomeBannerSection({ post }: HomeBannerSectionProps) {
     return (
         <section className="relative w-full overflow-hidden bg-muted">
             <div className="relative w-full aspect-[21/9] md:aspect-[21/7] lg:aspect-[21/6]">
-                <Image
-                    src={post.featured_image}
-                    alt={post.title ?? "Banner"}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="100vw"
-                />
+                {isVideoUrl(post.featured_image) ? (
+                    <video
+                        src={post.featured_image}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                    />
+                ) : (
+                    <Image
+                        src={post.featured_image}
+                        alt={post.title ?? "Banner"}
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="100vw"
+                    />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
                 <div className="absolute inset-0 flex items-center">
                     <div className="container mx-auto px-4">

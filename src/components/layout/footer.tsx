@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_MENUS = [
-    { slug: 'informacion',        title: 'Información' },
-    { slug: 'ayuda',              title: 'Ayuda' },
-    { slug: 'datos-de-contacto',  title: 'Datos de Contacto' },
+    { slug: 'informacion', title: 'Información' },
+    { slug: 'ayuda', title: 'Ayuda' },
+    { slug: 'datos-de-contacto', title: 'Datos de Contacto' },
 ];
 
 async function fetchMenuChildren(parentSlug: string): Promise<CmsPost[]> {
@@ -24,7 +24,7 @@ async function Copyright() {
     cacheLife('days');
     return (
         <div className='text-muted-foreground'>
-            © {new Date().getFullYear()} KOI Collectibles. All rights reserved.
+            © {new Date().getFullYear()} Die Milch. Todos los derechos reservados.
         </div>
     );
 }
@@ -41,16 +41,16 @@ export async function Footer() {
     );
 
     return (
-        <footer className="border-t border-border mt-auto">
-            <div className="container mx-auto px-4 py-12">
+        <footer className="mt-auto">
+            <div className="container mx-auto py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
                     {/* Brand column */}
                     <div className="flex flex-col gap-4">
                         <Link href="/">
                             <Image
-                                src="https://mmcb.b-cdn.net/media/attachments/0/c/4/0/60593b52331c1146353026da4cbc9ffbfd78b635db83fca47b25690df620/logo.jpg"
-                                alt="Koi Collectibles"
+                                src="https://mmcb.b-cdn.net/media/attachments/7/6/e/4/2f41f40fd7c4c4abfb643ff58a365c5fda3e94d068f14814dc36151afdb7/logo-diemilch.webp"
+                                alt="DieMilch"
                                 width={120}
                                 height={40}
                                 className="h-12 w-auto"
@@ -64,7 +64,7 @@ export async function Footer() {
                             <h4 className="text-sm font-semibold mb-4 uppercase tracking-wider text-primary">
                                 {menu.title}
                             </h4>
-                            <ul className="space-y-2 text-sm text-white">
+                            <ul className="space-y-2 text-sm text-foreground">
                                 {menu.items.length === 0 && (
                                     <li className="italic opacity-40">Sin contenido</li>
                                 )}
