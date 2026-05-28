@@ -33,6 +33,7 @@ export async function FeaturedProducts() {
     return (
         <ProductCarousel
             title="Productos Destacados"
+            excerpt=""
             products={products}
         />
     )
