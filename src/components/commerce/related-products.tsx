@@ -37,6 +37,7 @@ export async function RelatedProducts({ collectionSlug, currentProductId }: Rela
     return (
         <ProductCarousel
             title="Related Products"
+            excerpt=""
             products={products}
         />
     );
