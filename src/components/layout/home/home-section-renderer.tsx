@@ -1,4 +1,4 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { getPostDetail, getPosts } from "@/lib/swipall/rest-adapter";
 import type { CmsPost } from "@/lib/swipall/types/types";
 import { getHomeBlockType, type HomeBlockType } from "./home-section-types";
@@ -26,6 +26,7 @@ const SECTION_RENDERERS: Record<HomeBlockType, (props: { post: CmsPost; items?: 
 export async function HomeSectionRenderer({ post }: HomeSectionRendererProps) {
     "use cache";
     cacheLife("hours");
+    cacheTag("home");
     const type = getHomeBlockType(post);
     if (!type) {
         return null;

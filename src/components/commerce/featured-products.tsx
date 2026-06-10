@@ -1,12 +1,13 @@
 import { ProductCarousel } from "@/components/commerce/product-carousel";
 import { searchProducts } from "@/lib/swipall/rest-adapter";
 import { ProductKind } from "@/lib/swipall/types/types";
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { getAuthUserCustomerId } from '@/lib/auth';
 
 async function getFeaturedCollectionProducts(customerId?: string) {
     'use cache'
     cacheLife('days')
+    cacheTag('featured-products')
 
     try {
         const params = {

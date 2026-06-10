@@ -1,6 +1,6 @@
 import { getPosts } from '@/lib/swipall/rest-adapter';
 import { CmsPost } from '@/lib/swipall/types/types';
-import { cacheLife } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,6 +32,7 @@ async function Copyright() {
 export async function Footer() {
     'use cache';
     cacheLife('days');
+    cacheTag('footer');
 
     const menus = await Promise.all(
         FOOTER_MENUS.map(async (menu) => ({
