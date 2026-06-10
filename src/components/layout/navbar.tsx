@@ -26,8 +26,8 @@ export function Navbar() {
 
                         <Link href="/" className="flex-shrink-0">
                             <Image
-                                src="https://mmcb.b-cdn.net/media/attachments/7/6/e/4/2f41f40fd7c4c4abfb643ff58a365c5fda3e94d068f14814dc36151afdb7/logo-diemilch.webp"
-                                alt="Swipall"
+                                src="https://mmcb.b-cdn.net/media/attachments/2/5/6/5/4f0bbe0631570be58ca2ae7f4c41e36b5f3133cfd9fbaf38f35b7ebabfd3/logo.png"
+                                alt="Milch"
                                 width={120}
                                 height={27}
                                 className="h-14 w-auto"

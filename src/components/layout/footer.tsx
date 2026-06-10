@@ -50,8 +50,8 @@ export async function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/">
                             <Image
-                                src="https://mmcb.b-cdn.net/media/attachments/7/6/e/4/2f41f40fd7c4c4abfb643ff58a365c5fda3e94d068f14814dc36151afdb7/logo-diemilch.webp"
-                                alt="DieMilch"
+                                src="https://mmcb.b-cdn.net/media/attachments/2/5/6/5/4f0bbe0631570be58ca2ae7f4c41e36b5f3133cfd9fbaf38f35b7ebabfd3/logo.png"
+                                alt="Milch"
                                 width={120}
                                 height={40}
                                 className="h-12 w-auto"
