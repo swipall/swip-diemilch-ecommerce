@@ -1,11 +1,12 @@
 import { getPosts } from "@/lib/swipall/rest-adapter";
 import { CmsPost } from "@/lib/swipall/types/types";
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { HomeBannerSliderSection } from "./home-banner-slider-section";
 
 export async function HomeBannerSliderSectionWrapper({ post, items }: { post: CmsPost; items?: CmsPost[] }) {
     "use cache";
     cacheLife("hours");
+    cacheTag("home");
 
     // If items are provided, use them directly
     if (items && items.length > 0) {

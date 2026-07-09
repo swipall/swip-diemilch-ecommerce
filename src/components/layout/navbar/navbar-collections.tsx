@@ -7,11 +7,12 @@ import {
 } from '@/components/ui/navigation-menu';
 import { getPosts } from '@/lib/swipall/rest-adapter';
 import { CmsPost } from '@/lib/swipall/types/types';
-import { cacheLife } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export async function NavbarCollections() {
     "use cache";
     cacheLife('days');
+    cacheTag('menu');
 
     const topLevel = await getPosts({ parent__slug: 'menu-principal', ordering: 'ordering' });
 

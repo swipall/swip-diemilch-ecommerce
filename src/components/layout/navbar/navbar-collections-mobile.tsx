@@ -1,12 +1,13 @@
 import { getPosts } from '@/lib/swipall/rest-adapter';
 import { CmsPost } from '@/lib/swipall/types/types';
-import { cacheLife } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 
 export async function NavbarCollectionsMobile() {
     'use cache';
     cacheLife('days');
+    cacheTag('menu');
 
     const topLevel = await getPosts({ parent__slug: 'menu-principal', ordering: 'ordering' });
 

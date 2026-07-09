@@ -8,13 +8,16 @@ const VALID_TAGS = [
     'featured-products',
     'home',
     'footer',
+    'menu',
+    'active-channel',
 ] as const;
 
-// Dynamic tags follow patterns like 'product-{slug}', 'collection-{slug}', 'related-products-{slug}'
+// Dynamic tags follow patterns like 'product-{slug}', 'collection-{slug}', 'related-products-{slug}', 'page-{slug}'
 const DYNAMIC_TAG_PATTERNS = [
     /^product-.+$/,
     /^collection-.+$/,
     /^related-products-.+$/,
+    /^page-.+$/,
 ];
 
 function isValidTag(tag: string): boolean {

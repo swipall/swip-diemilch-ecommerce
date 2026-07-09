@@ -9,6 +9,7 @@ import { CatalogInterface, InterfaceApiListResponse } from './types/types';
 export async function getActiveChannelCached() {
     'use cache';
     cacheLife('hours');
+    cacheTag('active-channel');
 
     try {
         const result = await getActiveChannel();
