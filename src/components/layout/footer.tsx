@@ -99,7 +99,7 @@ export async function Footer() {
                 <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
                     <Copyright />
                     <div className="flex items-center gap-2 text-muted-foreground">
-                        <span>Powered by</span>
+                        <span>Powered by </span>
                         <a
                             href="https://swipall.io"
                             target="_blank"
